@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Copyright (c) 2021.
+ * Created By
+ * @author    Mike Hartl
+ * @copyright 2021  Mike Hartl All rights reserved
+ * @license   The source code of this document is proprietary work, and is licensed for distribution or use.
+ * @created   20.05.2021
+ * @version   0.0.0
+ */
 namespace App\Tests\Creator;
 
 use App\Converter\SepaXmlConverter;
@@ -14,6 +22,10 @@ use App\Model\PaymentInformation;
 use App\Model\SepaOrder;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class SepaCreaterTest
+ * @package App\Tests\Creator
+ */
 class SepaCreaterTest extends TestCase
 {
     public function testConvertGehalt()
@@ -22,7 +34,7 @@ class SepaCreaterTest extends TestCase
         $transactionTotal = 0;
 
         $sepaOrder = new SepaOrder();
-        $sepaOrder->setSepaVersion(SepaOrder::SEPA_VERSION_OLD);
+        $sepaOrder->setSepaVersion(SepaOrder::SEPA_VERSION_NEW);
         $sepaOrder->setPaymentType(SepaOrder::PAYMENT_TYPE_BANK_TRANSFERS);
 
         $sepaOrder->setMessageIdentification('Gehalt.05.2021');
@@ -30,8 +42,8 @@ class SepaCreaterTest extends TestCase
         $sepaOrder->setClientName('Dienstleister GmbH');
 
         $clientBankData = new ClientBankData();
-        $clientBankData->setClientName('Firma GmbH');
-        $clientBankData->setIban('DE17861500000000001741');
+        $clientBankData->setClientName('Fanta AG');
+        $clientBankData->setIban('DE179978000222200001741');
         $clientBankData->setBic('FIRMDELLXXX');
         $sepaOrder->setClientBankData($clientBankData);
         // möglicher Loop start
@@ -41,17 +53,17 @@ class SepaCreaterTest extends TestCase
 
         $paymentInformation = new PaymentInformation();
         $paymentInformation->setExecutionDate('2021-05-30');
-        $paymentInformation->setAmount('1813.29');
+        $paymentInformation->setAmount('2114.15');
         $transactionTotal += (float)$paymentInformation->getAmount();
 
-        $paymentInformation->setReference('1060/202105');
+        $paymentInformation->setReference('2058/202105');
         $paymentInformation->setIntendedUse('Gehalt 05/2021');
         $paymentInformation->setCategoryPurposeCode(PaymentInformation::SALARY_TRANSFERS);
         $paymentInformation->setPurposeCode(PaymentInformation::SALARY_TRANSFERS);
 
         $payeeData = new PayeeData();
         $payeeData->setName('Max Mustermann');
-        $payeeData->setIban('DE93101517390101753982');
+        $payeeData->setIban('DE93143505390101753982');
         $payeeData->setBic('BANKDEFF');
 
         $paymentInformation->setPayeeData($payeeData);
@@ -102,7 +114,7 @@ class SepaCreaterTest extends TestCase
 
         $paymentInformation = new PaymentInformation();
         $paymentInformation->setExecutionDate('2021-06-22');
-        $paymentInformation->setAmount('11.90');
+        $paymentInformation->setAmount('45.90');
         $transactionTotal += (float)$paymentInformation->getAmount();
 
         $paymentInformation->setReference('Referenz');
@@ -110,7 +122,7 @@ class SepaCreaterTest extends TestCase
 
         $payeeData = new PayeeData();
         $payeeData->setName('Max Mustermann');
-        $payeeData->setIban('DE69760100850109996856');
+        $payeeData->setIban('DE69756100880102296856');
         $payeeData->setBic('PBNKDEFFXXX');
 
         $paymentInformation->setPayeeData($payeeData);
@@ -146,14 +158,14 @@ class SepaCreaterTest extends TestCase
         $sepaOrder->setPaymentType(SepaOrder::PAYMENT_BASIC_DIRECT_DEBITS);
 
         $sepaOrder->setMessageIdentification('Einzug.2021-06');
-        $sepaOrder->setPaymentInformationId('Best.v.13.05.2021');
+        $sepaOrder->setPaymentInformationId('Best.v.12.05.2021');
         $sepaOrder->setClientName('Dienstleister GmbH');
 
         $clientBankData = new ClientBankData();
         $clientBankData->setClientName('Firma GmbH');
         $clientBankData->setIban('DE13799300200000054321');
         $clientBankData->setBic('BNKADENN777');
-        $clientBankData->setCreditorId('DE98ZZZ99999999');
+        $clientBankData->setCreditorId('98ZZE99889999');
         $sepaOrder->setClientBankData($clientBankData);
         // möglicher Loop start
 
@@ -162,7 +174,7 @@ class SepaCreaterTest extends TestCase
 
         $paymentInformation = new PaymentInformation();
         $paymentInformation->setExecutionDate('2021-06-30');
-        $paymentInformation->setAmount('119.00');
+        $paymentInformation->setAmount('85.00');
         $transactionTotal += (float)$paymentInformation->getAmount();
 
         $paymentInformation->setReference('12345678');
@@ -170,14 +182,14 @@ class SepaCreaterTest extends TestCase
 
         $depitData = new DepitData();
         $depitData->setSequenceType(DepitData::SEQUENCE_TYPE_SINGLE_DEPIT);
-        $depitData->setMandateReference('KUN123');
-        $depitData->setSignMandateDate('2021-06-13');
+        $depitData->setMandateReference('KUNDE7858');
+        $depitData->setSignMandateDate('2021-06-14');
         $paymentInformation->setDepit($depitData);
 
         $payeeData = new PayeeData();
         $payeeData->setName('Kunde,Karl');
         $payeeData->setIban('AT482015210000063789');
-        $payeeData->setBic('BANKATWW123');
+        $payeeData->setBic('BANKATWW');
 
         $paymentInformation->setPayeeData($payeeData);
 

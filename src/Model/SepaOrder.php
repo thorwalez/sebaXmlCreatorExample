@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Copyright (c) 2021.
+ * Created By
+ * @author    Mike Hartl
+ * @copyright 2021  Mike Hartl All rights reserved
+ * @license   The source code of this document is proprietary work, and is licensed for distribution or use.
+ * @created   20.05.2021
+ * @version   0.0.0
+ */
 
 namespace App\Model;
 
@@ -8,6 +16,10 @@ use App\Collection\PaymentInformationCollection;
 use App\Creator\PaymentInformationTransferInterface;
 use App\Creator\SepaTransferInterface;
 
+/**
+ * Class SepaOrder
+ * @package App\Model
+ */
 class SepaOrder
 {
     const SEPA_VERSION_NEW = 1;

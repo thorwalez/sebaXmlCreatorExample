@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Copyright (c) 2021.
+ * Created By
+ * @author    Mike Hartl
+ * @copyright 2021  Mike Hartl All rights reserved
+ * @license   The source code of this document is proprietary work, and is licensed for distribution or use.
+ * @created   20.05.2021
+ * @version   0.0.0
+ */
 
 namespace App\Creator;
 
@@ -7,6 +15,10 @@ namespace App\Creator;
 use App\Model\PaymentInformation;
 use App\Model\SepaOrder;
 
+/**
+ * Class PaymentInformationDirectDebitTransfer
+ * @package App\Creator
+ */
 class PaymentInformationDirectDebitTransfer implements PaymentInformationTransferInterface
 {
     /**
@@ -161,14 +173,14 @@ class PaymentInformationDirectDebitTransfer implements PaymentInformationTransfe
             $content .= "            <BIC>$bic</BIC>" . \PHP_EOL;
             $content .= '          </FinInstnId>' . \PHP_EOL;
             $content .= '        </DbtrAgt>' . \PHP_EOL;
-        }else {
-            $content.='        <DbtrAgt>' . \PHP_EOL;
-            $content.='          <FinInstnId>' . \PHP_EOL;
-            $content.='            <Othr>' . \PHP_EOL;
-            $content.='              <Id>NOTPROVIDED</Id>' . \PHP_EOL;
-            $content.='            </Othr>' . \PHP_EOL;
-            $content.='          </FinInstnId>' . \PHP_EOL;
-            $content.='        </DbtrAgt>'. \PHP_EOL;
+        } else {
+            $content .= '        <DbtrAgt>' . \PHP_EOL;
+            $content .= '          <FinInstnId>' . \PHP_EOL;
+            $content .= '            <Othr>' . \PHP_EOL;
+            $content .= '              <Id>NOTPROVIDED</Id>' . \PHP_EOL;
+            $content .= '            </Othr>' . \PHP_EOL;
+            $content .= '          </FinInstnId>' . \PHP_EOL;
+            $content .= '        </DbtrAgt>' . \PHP_EOL;
         }
 
         $content .= '        <Dbtr>' . \PHP_EOL;
@@ -251,8 +263,8 @@ class PaymentInformationDirectDebitTransfer implements PaymentInformationTransfe
 
             $oldIban = $paymentInformation->getDepit()->getOldDeptorIban();
             if (!empty($oldIban)) {
-                $content .= '              <OrgnlDbtrAcct>' .\PHP_EOL;
-                $content .= '                <Id>' .\PHP_EOL;
+                $content .= '              <OrgnlDbtrAcct>' . \PHP_EOL;
+                $content .= '                <Id>' . \PHP_EOL;
                 $content .= "                  <IBAN>$oldIban</IBAN>" . \PHP_EOL;
                 $content .= '                </Id>' . \PHP_EOL;
                 $content .= '              </OrgnlDbtrAcct>' . \PHP_EOL;
