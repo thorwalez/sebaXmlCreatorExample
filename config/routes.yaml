@@ -1,0 +1,15 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+create:
+    path: /create
+    controller: App\Controller\DefaultController::createAccount
+
+payout:
+    path: /payout
+    controller: App\Controller\DefaultController::payout
+
+inpayment:
+    path: /inpayment
+    controller: App\Controller\DefaultController::inpayments
